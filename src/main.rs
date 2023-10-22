@@ -18,7 +18,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
     // response.debug_print_stories(5).await?;
 
     let mut native_options = eframe::NativeOptions::default();
-    native_options.initial_window_size = Some(Vec2::new(RESOLUTION.0, RESOLUTION.1));
+    native_options.initial_window_size =
+        Some(eframe::epaint::Vec2::new(RESOLUTION.0, RESOLUTION.1));
 
     eframe::run_native(
         "HackerNews-egui",
