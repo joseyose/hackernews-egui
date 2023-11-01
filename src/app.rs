@@ -254,6 +254,45 @@ fn toggle_ui(ui: &mut Ui, on: &mut bool) -> Response {
     //     //     .circle(center, 0.75 * radius, visuals.bg_fill, visuals.fg_stroke);
     // }
 
+    let heading = "Show HN: Phind Model beats GPT-4 at coding, with GPT-3.5 speed and 16k context";
+    let url = "(phind.com)";
+    let subheading = "269 points by rushingcreek 2 hours ago | hide | 129 comments";
+
+    let style = ui.style();
+    let heading_style = TextStyle::Heading;
+    let heading_style = heading_style.resolve(style);
+
+    let url_style = TextStyle::Button.resolve(style);
+
+    // Layout a custom job for text
+    let mut text_job = LayoutJob::default();
+    text_job.append(
+        heading,
+        0.0,
+        TextFormat {
+            // font_id: FontId::new(14.0, FontFamily::Proportional),
+            font_id: heading_style,
+            // color: Color32::WHITE,
+            ..Default::default()
+        },
+    );
+
+    text_job.append(
+        url,
+        2.5,
+        TextFormat {
+            // font_id: FontId::new(14.0, FontFamily::Monospace),
+            font_id: url_style,
+            // color: Color32::BLACK,
+            ..Default::default()
+        },
+    );
+
+    let wrap_width = ui.available_width(); //- total_extra.x;
+
+    let text = WidgetText::from(text_job);
+    let text_galley = text.into_galley(ui, None, wrap_width, TextStyle::Button);
+
     // testing a new thing
     let button_padding = ui.spacing().button_padding;
     let total_extra = button_padding + button_padding;
@@ -261,8 +300,6 @@ fn toggle_ui(ui: &mut Ui, on: &mut bool) -> Response {
     let title = WidgetText::from("Oxide: The Cloud Computer");
     let url = WidgetText::from("(oxide.computer)");
     let subtitle = WidgetText::from("801 points by CathalMullan 6 hours ago | hide | 479 comments");
-
-    let wrap_width = ui.available_width(); //- total_extra.x;
 
     let text_title = title.into_galley(ui, None, wrap_width, TextStyle::Heading);
     let text_url = url.into_galley(ui, None, wrap_width, TextStyle::Button);
@@ -276,30 +313,6 @@ fn toggle_ui(ui: &mut Ui, on: &mut bool) -> Response {
     desired_size.y = desired_size.y.at_least(ui.spacing().interact_size.y);
 
     let (rect, response) = ui.allocate_at_least(desired_size, Sense::click());
-
-    // Layout a custom job for text
-    let mut job = LayoutJob::default();
-    job.append(
-        "Hello",
-        0.0,
-        TextFormat {
-            font_id: FontId::new(14.0, FontFamily::Proportional),
-            color: Color32::WHITE,
-            ..Default::default()
-        },
-    );
-
-    job.append(
-        "World!",
-        0.0,
-        TextFormat {
-            font_id: FontId::new(14.0, FontFamily::Monospace),
-            color: Color32::BLACK,
-            ..Default::default()
-        },
-    );
-    let text = WidgetText::from(job);
-    let text_galley = text.into_galley(ui, None, wrap_width, TextStyle::Button);
 
     // comeback and add the accessibilty stuff
 
