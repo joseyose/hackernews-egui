@@ -1,6 +1,6 @@
 mod app;
 use app::HackerNewsEgui;
-
+mod storycard_widget;
 use std::error::Error;
 
 use hackernewsapi::HackerNewsAPI;
